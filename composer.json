@@ -1,0 +1,22 @@
+{
+    "name": "kikwik/double-opt-in-bundle",
+    "description": "Double opt-in management for Doctrine 2 entities",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Davide Scarpato",
+            "email": "davide@kikwik.it"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "symfony/framework-bundle": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kikwik\\DoubleOptInBundle\\": "src/"
+        }
+    }
+}
