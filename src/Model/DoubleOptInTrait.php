@@ -7,6 +7,11 @@ namespace Kikwik\DoubleOptInBundle\Model;
 trait DoubleOptInTrait
 {
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isDoubleOptInVerified = 0;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $doubleOptInVerifiedAt;
@@ -15,6 +20,18 @@ trait DoubleOptInTrait
      * @ORM\Column(type="string", length=180, nullable=true)
      */
     protected $doubleOptInSecretCode;
+
+    public function setIsDoubleOptInVerified(bool $isDoubleOptInVerified)
+    {
+        $this->isDoubleOptInVerified = $isDoubleOptInVerified;
+
+        return $this;
+    }
+
+    public function getIsDoubleOptInVerified(): bool
+    {
+        return $this->isDoubleOptInVerified;
+    }
 
     public function setDoubleOptInVerifiedAt(\DateTime $doubleOptInVerifiedAt)
     {

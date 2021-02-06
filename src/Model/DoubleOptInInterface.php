@@ -6,6 +6,9 @@ interface DoubleOptInInterface
 {
     public function getEmail(): ?string;
 
+    public function setIsDoubleOptInVerified(bool $doubleOptInVerified);
+    public function getIsDoubleOptInVerified(): bool;
+
     public function setDoubleOptInVerifiedAt(\DateTime $doubleOptInVerifiedAt);
     public function getDoubleOptInVerifiedAt(): ?\DateTime;
 

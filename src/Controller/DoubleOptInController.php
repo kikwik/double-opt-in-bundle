@@ -26,6 +26,7 @@ class DoubleOptInController extends AbstractController
         if($object)
         {
             /** @var \Kikwik\DoubleOptInBundle\Model\DoubleOptInInterface $object */
+            $object->setIsDoubleOptInVerified(true);
             $object->setDoubleOptInVerifiedAt(new \DateTime());
             $object->setDoubleOptInSecretCode(null);
             $this->entityManager->flush();
