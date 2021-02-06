@@ -70,3 +70,10 @@ class User implements UserInterface, DoubleOptInInterface
     //...
 }
 ```
+
+Make migrations and update your database
+
+```console
+$ php bin/console make:migration
+$ php bin/console doctrine:migrations:migrate
+```
