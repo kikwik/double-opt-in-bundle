@@ -6,7 +6,13 @@
   <services>
       <service id="Kikwik\DoubleOptInBundle\EventListener\DoubleOptInSecretCodeGenerator">
         <tag name="doctrine.event_listener" event="prePersist"/>
+        <argument type="service" id="mailer.mailer"/>
+        <argument type="service" id="translator"/>
+        <argument type="service" id="router"/>
       </service>
 
+      <service id="kikwik_double_opt_in.controller.double_opt_in_controller" class="Kikwik\DoubleOptInBundle\Controller\DoubleOptInController" public="true">
+        <argument type="service" id="doctrine.orm.entity_manager"/>
+      </service>
   </services>
 </container>

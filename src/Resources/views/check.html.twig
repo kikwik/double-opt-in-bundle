@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'double_opt_in.title'|trans({},'KikwikDoubleOptInBundle') }}{% endblock %}
+
+{% block body %}
+    <div class="alert alert-{{ result }}">
+        {{ ('double_opt_in.'~result)|trans({},'KikwikDoubleOptInBundle') }}
+    </div>
+{% endblock %}

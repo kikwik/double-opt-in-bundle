@@ -1,0 +1,12 @@
+double_opt_in:
+    title: Verifica email
+    success: La tua email è stata verificata con successo
+    danger: Il codice di verifica non è stato trovato, forse è già stato usato?
+    email:
+        sender:  'no-reply@example.com'
+        subject: 'Conferma la tua email'
+        content: |
+            <p>
+                <a href="{{ confirm_url }}">Clicca qui per confermare la tua email</a><br/>
+                oppure incolla in seguente link nella barra degli indirizzi del browser: <br/>{{ confirm_url }}
+            </p>

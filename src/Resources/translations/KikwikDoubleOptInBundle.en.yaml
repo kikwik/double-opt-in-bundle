@@ -1,0 +1,11 @@
+double_opt_in:
+    title: Email verification
+    success: Your email has been successfully verified
+    danger: The verification code was not found, perhaps it has already been used?
+    email:
+        subject: 'Confirm your email'
+        content: |
+            <p>
+                <a href="{{ confirm_url }}">Click here to confirm your email</a><br/>
+                or paste the following link in the browser’s address bar: <br/>{{ confirm_url }}
+            </p>
