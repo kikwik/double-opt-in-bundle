@@ -18,6 +18,9 @@ class KikwikDoubleOptInExtension extends Extension
 
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
+
+        $mailManager = $container->getDefinition('kikwik_double_opt_in.service.double_opt_in_mail_manager');
+        $mailManager->setArgument(0, $config['sender_email']);
     }
 
 }

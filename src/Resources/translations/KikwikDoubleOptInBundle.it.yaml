@@ -3,7 +3,6 @@ double_opt_in:
     success: La tua email è stata verificata con successo
     danger: Il codice di verifica non è stato trovato, forse è già stato usato?
     email:
-        sender:  'no-reply@example.com'
         subject: 'Conferma la tua email'
         content: |
             <p>

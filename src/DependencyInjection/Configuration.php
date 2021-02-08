@@ -13,6 +13,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('kikwik_double_opt_in');
         $rootNode = $treeBuilder->getRootNode();
 
+        $rootNode
+            ->children()
+                ->scalarNode('sender_email')->defaultValue('no-reply@example.com')->cannotBeEmpty()->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 
