@@ -35,7 +35,13 @@ Create the `config/packages/kikwik_double_opt_in.yaml` config file, set the `sen
 
 ```yaml
 kikwik_double_opt_in:
-    sender_email: no-reply@example.com
+    sender_email: '%env(SENDER_EMAIL)%'
+```
+
+and define it in your .env file
+
+```dotenv
+SENDER_EMAIL=no-reply@example.com
 ```
 
 Implements `DoubleOptInInterface` to your classes and use the `DoubleOptInTrait`:
