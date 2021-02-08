@@ -19,7 +19,7 @@ Configuration
 
 Configure the symfony/mailer component in your `.env` file:
 
-```
+```dotenv
 MAILER_DSN=sendmail+smtp://localhost
 ```
 
