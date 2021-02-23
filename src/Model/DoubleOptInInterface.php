@@ -15,4 +15,7 @@ interface DoubleOptInInterface
     public function setDoubleOptInSecretCode(?string $doubleOptInSecretCode);
     public function getDoubleOptInSecretCode(): ?string;
 
+    public function disableDoubleOptIn();
+    public function enableDoubleOptIn();
+    public function doubleOptInShouldSendEmail(): bool;
 }

@@ -33,6 +33,9 @@ class DoubleOptInSecretCodeGenerator
     {
         $entity = $args->getObject();
 
-        $this->mailManager->sendEmail($entity);
+        if($entity->doubleOptInShouldSendEmail())
+        {
+            $this->mailManager->sendEmail($entity);
+        }
     }
 }

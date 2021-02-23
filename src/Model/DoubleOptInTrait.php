@@ -9,7 +9,7 @@ trait DoubleOptInTrait
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $isDoubleOptInVerified = 0;
+    protected $isDoubleOptInVerified = false;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -53,5 +53,25 @@ trait DoubleOptInTrait
     public function getDoubleOptInSecretCode(): ?string
     {
         return $this->doubleOptInSecretCode;
+    }
+
+    /**
+     * @var bool    enable or disable email send for this object (useful when importing data)
+     */
+    protected $doubleOptInShouldSendEmail = true;
+
+    public function doubleOptInShouldSendEmail(): bool
+    {
+        return $this->doubleOptInShouldSendEmail;
+    }
+
+    public function enableDoubleOptIn()
+    {
+        $this->doubleOptInShouldSendEmail = true;
+    }
+
+    public function disableDoubleOptIn()
+    {
+        $this->doubleOptInShouldSendEmail = false;
     }
 }

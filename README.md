@@ -73,6 +73,39 @@ $ php bin/console make:migration
 $ php bin/console doctrine:migrations:migrate
 ```
 
+Usage
+-----
+
+Every time you persist a new entity which implements DoubleOptInInterface a confirmation email is sent.
+If you want to disable the confirmation email (useful when importing data) just call `disableDoubleOptIn` before persisting your entity
+
+```php
+$user = new User();
+$user->setEmail($email);
+$user->setPassword('suca');
+
+$user->disableDoubleOptIn();
+
+$em->persist($user);
+$em->flush();
+```
+
+To resend the confirmation email autowire the `DoubleOptInMailManager` service and call `sendEmail` (be sure that `$doubleOptInSecretCode` field is not empty)
+
+```php
+/**
+ * @Route("/resend-email/{id}", name="app_resend_email")
+ */
+public function resendConfirmationEmail(User $user, DoubleOptInMailManager $doubleOptInMailManager)
+{
+    if($user->getDoubleOptInSecretCode())
+    {
+        $doubleOptInMailManager->sendEmail($user);
+    }
+    return $this->redirectToRoute('app_home');
+}
+```
+
 Customization
 -------------
 
