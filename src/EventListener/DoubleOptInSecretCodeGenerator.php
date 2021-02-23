@@ -27,6 +27,11 @@ class DoubleOptInSecretCodeGenerator
         }
 
         $entity->setDoubleOptInSecretCode(uniqid(md5($entity->getEmail())));
+    }
+
+    public function postPersist(LifecycleEventArgs $args): void
+    {
+        $entity = $args->getObject();
 
         $this->mailManager->sendEmail($entity);
     }

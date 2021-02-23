@@ -6,6 +6,7 @@
   <services>
       <service id="Kikwik\DoubleOptInBundle\EventListener\DoubleOptInSecretCodeGenerator">
         <tag name="doctrine.event_listener" event="prePersist"/>
+        <tag name="doctrine.event_listener" event="postPersist"/>
         <argument type="service" id="kikwik_double_opt_in.service.double_opt_in_mail_manager"/>
       </service>
 
