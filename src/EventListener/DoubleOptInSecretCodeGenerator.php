@@ -32,6 +32,9 @@ class DoubleOptInSecretCodeGenerator
     public function postPersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
+        if (!$entity instanceof DoubleOptInInterface) {
+            return;
+        }
 
         if($entity->doubleOptInShouldSendEmail())
         {
