@@ -8,6 +8,7 @@
         <tag name="doctrine.event_listener" event="prePersist"/>
         <tag name="doctrine.event_listener" event="postPersist"/>
         <argument type="service" id="kikwik_double_opt_in.service.double_opt_in_mail_manager"/>
+        <argument type="service" id="request_stack"/>
       </service>
 
       <service id="kikwik_double_opt_in.service.double_opt_in_mail_manager" class="Kikwik\DoubleOptInBundle\Service\DoubleOptInMailManager">
