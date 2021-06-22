@@ -19,8 +19,11 @@ class KikwikDoubleOptInExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
+        $controller = $container->getDefinition('kikwik_double_opt_in.controller.double_opt_in_controller');
+        $controller->setArgument('$removeSecretCodeAfterVerification',$config['remove_secret_code_after_verification']);
+
         $mailManager = $container->getDefinition('kikwik_double_opt_in.service.double_opt_in_mail_manager');
-        $mailManager->setArgument(0, $config['sender_email']);
+        $mailManager->setArgument('$senderEmail', $config['sender_email']);
     }
 
 }

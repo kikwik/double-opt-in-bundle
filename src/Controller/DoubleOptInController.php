@@ -18,11 +18,16 @@ class DoubleOptInController extends AbstractController
      * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
     private $eventDispatcher;
+    /**
+     * @var bool
+     */
+    private $removeSecretCodeAfterVerification;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(bool $removeSecretCodeAfterVerification, EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher)
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->removeSecretCodeAfterVerification = $removeSecretCodeAfterVerification;
     }
 
     public function check(string $modelClassB64, string $secretCode)
@@ -35,7 +40,10 @@ class DoubleOptInController extends AbstractController
             /** @var \Kikwik\DoubleOptInBundle\Model\DoubleOptInInterface $object */
             $object->setIsDoubleOptInVerified(true);
             $object->setDoubleOptInVerifiedAt(new \DateTime());
-            $object->setDoubleOptInSecretCode(null);
+            if($this->removeSecretCodeAfterVerification)
+            {
+                $object->setDoubleOptInSecretCode(null);
+            }
             $this->entityManager->flush();
             $result = 'success';
 

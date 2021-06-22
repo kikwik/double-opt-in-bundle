@@ -12,7 +12,7 @@
       </service>
 
       <service id="kikwik_double_opt_in.service.double_opt_in_mail_manager" class="Kikwik\DoubleOptInBundle\Service\DoubleOptInMailManager">
-        <argument>%sender_email%</argument>
+        <argument>$senderEmail</argument>
         <argument type="service" id="mailer.mailer"/>
         <argument type="service" id="translator"/>
         <argument type="service" id="router"/>
@@ -20,6 +20,7 @@
       <service id="Kikwik\DoubleOptInBundle\Service\DoubleOptInMailManager" alias="kikwik_double_opt_in.service.double_opt_in_mail_manager"/>
 
       <service id="kikwik_double_opt_in.controller.double_opt_in_controller" class="Kikwik\DoubleOptInBundle\Controller\DoubleOptInController" public="true">
+        <argument>$removeSecretCodeAfterVerification</argument>
         <argument type="service" id="doctrine.orm.entity_manager"/>
         <argument type="service" id="event_dispatcher"/>
       </service>

@@ -36,6 +36,7 @@ Create the `config/packages/kikwik_double_opt_in.yaml` config file, set the `sen
 ```yaml
 kikwik_double_opt_in:
     sender_email: '%env(SENDER_EMAIL)%'
+    remove_secret_code_after_verification: true
 ```
 
 and define it in your .env file
