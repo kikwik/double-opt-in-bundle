@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.5 (2021-06-22)
+- dispatch custom event when double optin is verified
+- remove_secret_code_after_verification setting
+
 ## v1.0.4 (2021-06-17)
 - Enhance email template
 
