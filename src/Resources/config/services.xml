@@ -21,6 +21,7 @@
 
       <service id="kikwik_double_opt_in.controller.double_opt_in_controller" class="Kikwik\DoubleOptInBundle\Controller\DoubleOptInController" public="true">
         <argument type="service" id="doctrine.orm.entity_manager"/>
+        <argument type="service" id="event_dispatcher"/>
       </service>
   </services>
 </container>

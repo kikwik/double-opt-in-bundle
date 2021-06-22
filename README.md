@@ -1,7 +1,7 @@
 KikwikDoubleOptInBundle
 =======================
 
-Double opt-in management for Doctrine 2 entities in symfony 4
+Double opt-in management for Doctrine 2 entities in symfony 4.4 and 5.x
 
 
 Installation
@@ -44,7 +44,7 @@ and define it in your .env file
 SENDER_EMAIL=no-reply@example.com
 ```
 
-Implements `DoubleOptInInterface` to your classes and use the `DoubleOptInTrait`:
+Implements `DoubleOptInInterface` to your classes or use the `DoubleOptInTrait`:
 
 ```php
 namespace App\Entity;
@@ -81,8 +81,8 @@ If you want to disable the confirmation email (useful when importing data) just 
 
 ```php
 $user = new User();
-$user->setEmail($email);
-$user->setPassword('suca');
+$user->setEmail('test@example.com');
+$user->setPassword('secret');
 
 $user->disableDoubleOptIn();
 
@@ -124,4 +124,36 @@ double_opt_in:
                 <a href="{{ confirm_url }}">Clicca qui per confermare la tua email</a><br/>
                 oppure incolla in seguente link nella barra degli indirizzi del browser: <br/>{{ confirm_url }}
             </p>
+```
+
+
+EventListener
+-------------
+
+After a successful double-opt-in confirmation the bundle will dispatch the `DoubleOptInVerifiedEvent` custom event, 
+so you can listen for it and do your stuff.
+
+```php
+// src/EventSubscriber/AfterDoubleOptInEventSubscriber.php
+namespace App\EventSubscriber;
+
+use Kikwik\DoubleOptInBundle\Event\DoubleOptInVerifiedEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+class AfterDoubleOptInEventSubscriber implements EventSubscriberInterface
+{
+    public function onDoubleOptInVerified(DoubleOptInVerifiedEvent $event)
+    {
+        $object = $event->getObject();
+
+        // Do something with the $object, which is verified
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            'kikwik.double_opt_in.verified' => 'onDoubleOptInVerified',
+        ];
+    }
+}
 ```
