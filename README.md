@@ -44,7 +44,7 @@ and define it in your .env file
 
 ```dotenv
 SENDER_EMAIL=no-reply@example.com
-SENDER_NAME=My Company Name
+SENDER_NAME="My Company Name"
 ```
 
 Implements `DoubleOptInInterface` to your classes or use the `DoubleOptInTrait`:
