@@ -13,6 +13,7 @@
 
       <service id="kikwik_double_opt_in.service.double_opt_in_mail_manager" class="Kikwik\DoubleOptInBundle\Service\DoubleOptInMailManager">
         <argument>$senderEmail</argument>
+        <argument>$senderName</argument>
         <argument type="service" id="mailer.mailer"/>
         <argument type="service" id="translator"/>
         <argument type="service" id="router"/>

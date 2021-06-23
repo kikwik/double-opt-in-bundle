@@ -16,6 +16,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('sender_email')->defaultValue('no-reply@example.com')->cannotBeEmpty()->end()
+                ->scalarNode('sender_name')->defaultValue('')->end()
                 ->booleanNode('remove_secret_code_after_verification')->defaultTrue()->end()
             ->end()
         ;

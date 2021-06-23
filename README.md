@@ -36,6 +36,7 @@ Create the `config/packages/kikwik_double_opt_in.yaml` config file, set the `sen
 ```yaml
 kikwik_double_opt_in:
     sender_email: '%env(SENDER_EMAIL)%'
+    sender_name: '%env(SENDER_NAME)%'
     remove_secret_code_after_verification: true
 ```
 
@@ -43,6 +44,7 @@ and define it in your .env file
 
 ```dotenv
 SENDER_EMAIL=no-reply@example.com
+SENDER_NAME=My Company Name
 ```
 
 Implements `DoubleOptInInterface` to your classes or use the `DoubleOptInTrait`:
