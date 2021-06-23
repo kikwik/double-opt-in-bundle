@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.6 (2021-06-23)
+- added sender_name parameter
+
 ## v1.0.5 (2021-06-22)
 - dispatch custom event when double optin is verified
 - remove_secret_code_after_verification setting
