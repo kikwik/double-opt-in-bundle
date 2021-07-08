@@ -39,7 +39,10 @@ class DoubleOptInController extends AbstractController
         {
             /** @var \Kikwik\DoubleOptInBundle\Model\DoubleOptInInterface $object */
             $object->setIsDoubleOptInVerified(true);
-            $object->setDoubleOptInVerifiedAt(new \DateTime());
+            if(!$object->getDoubleOptInVerifiedAt())
+            {
+                $object->setDoubleOptInVerifiedAt(new \DateTime());
+            }
             if($this->removeSecretCodeAfterVerification)
             {
                 $object->setDoubleOptInSecretCode(null);
@@ -56,7 +59,8 @@ class DoubleOptInController extends AbstractController
         }
 
         return $this->render('@KikwikDoubleOptIn/check.html.twig', [
-            'result' => $result
+            'result' => $result,
+            'object' => $object,
         ]);
     }
 }
