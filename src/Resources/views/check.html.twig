@@ -6,4 +6,8 @@
     <div class="alert alert-{{ result }}">
         {{ ('double_opt_in.'~result)|trans({},'KikwikDoubleOptInBundle') }}
     </div>
+    
+    {% if object %}
+        {# do something with the verified object #}
+    {% endif %}
 {% endblock %}
