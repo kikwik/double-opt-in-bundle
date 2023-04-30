@@ -4,29 +4,34 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd">
   <services>
+
+      <!-- EventListener\DoubleOptInSecretCodeGenerator -->
       <service id="Kikwik\DoubleOptInBundle\EventListener\DoubleOptInSecretCodeGenerator">
-        <tag name="doctrine.event_listener" event="prePersist"/>
-        <tag name="doctrine.event_listener" event="postPersist"/>
-        <argument type="service" id="kikwik_double_opt_in.service.double_opt_in_mail_manager"/>
-        <argument type="service" id="request_stack"/>
+          <tag name="doctrine.event_listener" event="prePersist"/>
+          <tag name="doctrine.event_listener" event="postPersist"/>
+          <argument type="service" id="kikwik_double_opt_in.service.double_opt_in_mail_manager"/>
+          <argument type="service" id="request_stack"/>
       </service>
 
+      <!-- Service\DoubleOptInMailManager -->
       <service id="kikwik_double_opt_in.service.double_opt_in_mail_manager" class="Kikwik\DoubleOptInBundle\Service\DoubleOptInMailManager">
-        <argument>$senderEmail</argument>
-        <argument>$senderName</argument>
-        <argument type="service" id="mailer.mailer"/>
-        <argument type="service" id="translator"/>
-        <argument type="service" id="router"/>
+          <argument>$senderEmail</argument>
+          <argument>$senderName</argument>
+          <argument type="service" id="mailer.mailer"/>
+          <argument type="service" id="translator"/>
+          <argument type="service" id="router"/>
+          <argument type="service" id="doctrine"/>
       </service>
       <service id="Kikwik\DoubleOptInBundle\Service\DoubleOptInMailManager" alias="kikwik_double_opt_in.service.double_opt_in_mail_manager"/>
 
+      <!-- Controller\DoubleOptInController -->
       <service id="kikwik_double_opt_in.controller.double_opt_in_controller" class="Kikwik\DoubleOptInBundle\Controller\DoubleOptInController" public="true">
-        <argument>$removeSecretCodeAfterVerification</argument>
-        <argument type="service" id="doctrine.orm.entity_manager"/>
-        <argument type="service" id="event_dispatcher"/>
-        <call method="setContainer">
-          <argument type="service" id="service_container"/>
-        </call>
+          <argument>$removeSecretCodeAfterVerification</argument>
+          <argument type="service" id="doctrine.orm.entity_manager"/>
+          <argument type="service" id="event_dispatcher"/>
+          <call method="setContainer">
+              <argument type="service" id="service_container"/>
+          </call>
       </service>
   </services>
 </container>

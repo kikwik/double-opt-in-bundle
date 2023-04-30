@@ -2,6 +2,7 @@
 
 namespace Kikwik\DoubleOptInBundle\Service;
 
+use Doctrine\Persistence\ManagerRegistry;
 use Kikwik\DoubleOptInBundle\Model\DoubleOptInInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
@@ -32,15 +33,20 @@ class DoubleOptInMailManager
      * @var string
      */
     private $senderName;
+    /**
+     * @var ManagerRegistry
+     */
+    private $doctrine;
 
 
-    public function __construct(string $senderEmail, string $senderName, MailerInterface $mailer, TranslatorInterface $translator, Router $router)
+    public function __construct(string $senderEmail, string $senderName, MailerInterface $mailer, TranslatorInterface $translator, Router $router, ManagerRegistry $doctrine)
     {
         $this->senderEmail = $senderEmail;
         $this->mailer = $mailer;
         $this->translator = $translator;
         $this->router = $router;
         $this->senderName = $senderName;
+        $this->doctrine = $doctrine;
     }
 
     public function sendEmail(DoubleOptInInterface $entity)
@@ -59,5 +65,9 @@ class DoubleOptInMailManager
             ])
         ;
         $this->mailer->send($email);
+
+        $entity->setDoubleOptInSendedAt(new \DateTime());
+        $this->doctrine->getManager()->persist($entity);
+        $this->doctrine->getManager()->flush();
     }
 }

@@ -8,6 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 trait DoubleOptInTrait
 {
     /**
+     * @ORM\Column(type="string", length=180, nullable=true)
+     */
+    protected $doubleOptInSecretCode;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $doubleOptInSendedAt;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $isDoubleOptInVerified = false;
@@ -17,10 +27,29 @@ trait DoubleOptInTrait
      */
     protected $doubleOptInVerifiedAt;
 
-    /**
-     * @ORM\Column(type="string", length=180, nullable=true)
-     */
-    protected $doubleOptInSecretCode;
+
+
+    public function setDoubleOptInSecretCode(?string $doubleOptInSecretCode)
+    {
+        $this->doubleOptInSecretCode = $doubleOptInSecretCode;
+    }
+
+    public function getDoubleOptInSecretCode(): ?string
+    {
+        return $this->doubleOptInSecretCode;
+    }
+
+    public function getDoubleOptInSendedAt(): ?\DateTime
+    {
+        return $this->doubleOptInSendedAt;
+    }
+
+    public function setDoubleOptInSendedAt(\DateTime $doubleOptInSendedAt)
+    {
+        $this->doubleOptInSendedAt = $doubleOptInSendedAt;
+
+        return $this;
+    }
 
     public function setIsDoubleOptInVerified(bool $isDoubleOptInVerified)
     {
@@ -44,16 +73,6 @@ trait DoubleOptInTrait
     public function getDoubleOptInVerifiedAt(): ?\DateTime
     {
         return $this->doubleOptInVerifiedAt;
-    }
-
-    public function setDoubleOptInSecretCode(?string $doubleOptInSecretCode)
-    {
-        $this->doubleOptInSecretCode = $doubleOptInSecretCode;
-    }
-
-    public function getDoubleOptInSecretCode(): ?string
-    {
-        return $this->doubleOptInSecretCode;
     }
 
     /**
