@@ -3,6 +3,7 @@
 
 namespace Kikwik\DoubleOptInBundle\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 
 trait DoubleOptInTrait
 {
