@@ -52,6 +52,10 @@ class DoubleOptInController extends AbstractController
 
             $event = new DoubleOptInVerifiedEvent($object);
             $this->eventDispatcher->dispatch($event, 'kikwik.double_opt_in.verified');
+            if($event->getResponse())
+            {
+                return $event->getResponse();
+            }
         }
         else
         {

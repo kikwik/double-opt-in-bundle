@@ -162,6 +162,9 @@ class AfterDoubleOptInEventSubscriber implements EventSubscriberInterface
         $object = $event->getObject();
 
         // Do something with the $object, which is verified
+        
+        // You may set the response to redirect to a custom page:
+        // $event->setResponse(new RedirectResponse('http://example.com/success'));
     }
 
     public static function getSubscribedEvents()
