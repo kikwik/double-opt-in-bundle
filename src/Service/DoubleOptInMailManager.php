@@ -49,7 +49,12 @@ class DoubleOptInMailManager
         $this->doctrine = $doctrine;
     }
 
-    public function sendEmail(DoubleOptInInterface $entity)
+    public function generateConfirmUrl(DoubleOptInInterface $entity): string
+    {
+        return $this->router->generate('kikwik_double_opt_in_check',['modelClassB64'=>base64_encode(get_class($entity)),'secretCode'=>$entity->getDoubleOptInSecretCode()],UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function sendEmail(DoubleOptInInterface $entity): void
     {
         // send email
         $fromAddress = New Address($this->senderEmail, $this->senderName);
@@ -60,7 +65,7 @@ class DoubleOptInMailManager
             ->subject($this->translator->trans('double_opt_in.email.subject',[],'KikwikDoubleOptInBundle'))
             ->htmlTemplate('@KikwikDoubleOptIn/email/sendSecretCode.html.twig')
             ->context([
-                'confirm_url' => $this->router->generate('kikwik_double_opt_in_check',['modelClassB64'=>base64_encode(get_class($entity)),'secretCode'=>$entity->getDoubleOptInSecretCode()],UrlGeneratorInterface::ABSOLUTE_URL),
+                'confirm_url' => $this->generateConfirmUrl($entity),
                 'object' => $entity,
             ])
         ;
