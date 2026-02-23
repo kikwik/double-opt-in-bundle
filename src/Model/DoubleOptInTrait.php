@@ -94,4 +94,13 @@ trait DoubleOptInTrait
     {
         $this->doubleOptInShouldSendEmail = false;
     }
+
+    /**
+     * This implementation returns the object itself for backward compatibility.
+     * You should override this method to return a DTO instead.
+     */
+    public function getDoubleOptInEntityAsDto()
+    {
+        return $this;
+    }
 }

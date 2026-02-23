@@ -6,6 +6,8 @@ interface DoubleOptInInterface
 {
     public function getEmail(): ?string;
 
+    public function getDoubleOptInEntityAsDto();
+
     public function setDoubleOptInSecretCode(?string $doubleOptInSecretCode);
     public function getDoubleOptInSecretCode(): ?string;
 

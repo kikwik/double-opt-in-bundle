@@ -66,7 +66,7 @@ class DoubleOptInMailManager
             ->htmlTemplate('@KikwikDoubleOptIn/email/sendSecretCode.html.twig')
             ->context([
                 'confirm_url' => $this->generateConfirmUrl($entity),
-                'object' => $entity,
+                'object' => $entity->getDoubleOptInEntityAsDto(),
             ])
         ;
         $this->mailer->send($email);

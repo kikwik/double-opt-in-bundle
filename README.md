@@ -66,6 +66,18 @@ class User implements UserInterface, DoubleOptInInterface
     use DoubleOptInTrait;
 
     //...
+    
+    /**
+     * return an array or a DTO object which will be used as context in the confirmation email.
+     */
+    public function getDoubleOptInEntityAsDto()
+    {
+        return [
+            'email' => $this->getEmail(),
+            'field1' => $this->getField1(),
+            'field2' => $this->getField2(),
+        ];
+    }
 }
 ```
 
